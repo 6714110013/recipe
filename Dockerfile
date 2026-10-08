@@ -2,12 +2,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy ไฟล์ csproj และ restore dependencies
-COPY ["RecipeApp/RecipeApp.csproj", "RecipeApp/"]
-RUN dotnet restore "RecipeApp/RecipeApp.csproj"
+COPY ["RecipeApp.csproj", "./"]
+RUN dotnet restore "RecipeApp.csproj"
 
 # Copy โค้ดทั้งหมดและ Build
 COPY . .
-WORKDIR "/src/RecipeApp"
 RUN dotnet publish "RecipeApp.csproj" -c Release -o /app/publish
 
 # Runtime Stage
