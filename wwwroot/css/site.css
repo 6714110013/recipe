@@ -1,0 +1,135 @@
+/* Dark & Purple Theme Setup */
+body {
+    background-color: #121218 !important;
+    color: #e0e0e0 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar Style */
+.navbar, header nav {
+    background: #1e1b2e !important;
+    border-bottom: 1px solid #342a56 !important;
+}
+
+.navbar-brand, .nav-link, header nav a {
+    color: #c084fc !important;
+    font-weight: 600;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #e9d5ff !important;
+}
+
+/* Card / Form Container */
+.dark-panel {
+    background-color: #1a1625;
+    border: 1px solid #2e2640;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+}
+
+/* Form Controls */
+.form-control, select.form-control {
+    background-color: #0f0d15 !important;
+    border: 1px solid #3b2d54 !important;
+    color: #f3e8ff !important;
+    border-radius: 8px !important;
+}
+
+.form-control:focus {
+    border-color: #a855f7 !important;
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.4) !important;
+}
+
+label.control-label {
+    color: #c084fc !important;
+    font-weight: 500;
+}
+
+/* Buttons */
+.btn-purple {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #fff !important;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-purple:hover {
+    background: linear-gradient(135deg, #a78bfa, #7c3aed);
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+}
+
+.btn-outline-purple {
+    background: transparent;
+    border: 1px solid #8b5cf6;
+    color: #c084fc !important;
+    border-radius: 8px;
+    padding: 8px 18px;
+}
+
+.btn-outline-purple:hover {
+    background-color: #8b5cf6;
+    color: #fff !important;
+}
+
+/* Table Styling */
+.table-custom {
+    color: #e0e0e0 !important;
+    background-color: #1a1625;
+    border-radius: 12px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-custom thead th {
+    background-color: #241d35 !important;
+    color: #c084fc !important;
+    border-bottom: 2px solid #3b2d54 !important;
+    padding: 14px;
+    font-size: 0.95rem;
+}
+
+.table-custom tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table-custom tbody tr:hover {
+    background-color: #261f38 !important;
+}
+
+.table-custom td {
+    border-top: 1px solid #2e2640 !important;
+    padding: 14px;
+    vertical-align: middle;
+}
+
+/* Badges & Tags */
+.badge-category {
+    background-color: #311b92;
+    color: #e9d5ff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid #6a1b9a;
+}
+
+.badge-popular {
+    background-color: #701a75;
+    color: #f0abfc;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    margin-left: 6px;
+    border: 1px solid #a21caf;
+}
+
+.badge-review {
+    color: #c084fc;
+    font-weight: 500;
+}

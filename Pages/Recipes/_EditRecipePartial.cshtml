@@ -1,0 +1,71 @@
+﻿@using RecipeApp.Models
+@model EditRecipeBase
+
+<div class="form-group">
+    <label asp-for="Name" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+</div>
+
+<!-- เพิ่ม Dropdown เลือกหมวดหมู่อาหารตรงนี้ -->
+<div class="form-group">
+    <label asp-for="Category" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <select asp-for="Category" class="form-control">
+            <option value="ของคาว">ของคาว</option>
+            <option value="ของหวาน">ของหวาน</option>
+            <option value="ของทานเล่น">ของทานเล่น</option>
+            <option value="ผัก/มังสวิรัติ">ผัก/มังสวิรัติ</option>
+            <option value="เครื่องดื่ม">เครื่องดื่ม</option>
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="Method" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <textarea asp-for="Method" class="form-control"></textarea>
+        <span asp-validation-for="Method" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="TimeToCookHrs" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="TimeToCookHrs" class="form-control" />
+        <span asp-validation-for="TimeToCookHrs" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="TimeToCookMins" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="TimeToCookMins" class="form-control" />
+        <span asp-validation-for="TimeToCookMins" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+            <label class="control-label">
+                <input asp-for="IsVegetarian" /> Vegetarian?
+                <span asp-validation-for="IsVegetarian" class="text-danger"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+            <label class="control-label">
+                <input asp-for="IsVegan" /> Vegan?
+                <span asp-validation-for="IsVegan" class="text-danger"></span>
+            </label>
+        </div>
+    </div>
+</div>

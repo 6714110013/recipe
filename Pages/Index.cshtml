@@ -1,0 +1,93 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Menus";
+}
+
+<!-- ส่วนฟอร์มค้นหาธีมดำม่วง -->
+<div class="dark-panel">
+    <form method="get" class="row g-3 align-items-end">
+        <div class="col-md-3">
+            <label class="control-label mb-1">หมวดหมู่อาหาร</label>
+            <select asp-for="SelectedCategory" class="form-control">
+                <option value="">-- ทุกหมวดหมู่ --</option>
+                <option value="ของคาว">ของคาว</option>
+                <option value="ของหวาน">ของหวาน</option>
+                <option value="ของทานเล่น">ของทานเล่น</option>
+                <option value="ผัก/มังสวิรัติ">ผัก/มังสวิรัติ</option>
+                <option value="เครื่องดื่ม">เครื่องดื่ม</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="control-label mb-1">จัดเรียง</label>
+            <select asp-for="SortBy" class="form-control">
+                <option value="">ล่าสุด</option>
+                <option value="popular">🔥 ยอดนิยม (คอมเมนต์มากที่สุด)</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="control-label mb-1">ค้นหาชื่อเมนู</label>
+            <input type="text" asp-for="SearchString" class="form-control" placeholder="พิมพ์ชื่อเมนู..." />
+        </div>
+
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-purple flex-grow-1">Search</button>
+            <a asp-page="/Index" class="btn btn-outline-purple">Clear</a>
+        </div>
+    </form>
+</div>
+
+<!-- ตารางแสดงเมนูอาหาร -->
+<div class="table-responsive dark-panel p-0">
+    <table class="table table-custom mb-0">
+        <thead>
+            <tr>
+                <th>Recipe</th>
+                <th>Category</th>
+                <th>TimeToCook</th>
+                <th>Comments</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Recipes != null && Model.Recipes.Any())
+            {
+                @foreach (var recipe in Model.Recipes)
+                {
+                    <tr>
+                        <td class="fw-bold text-white">
+                            @recipe.Name
+                            @if (recipe.ReviewCount >= 5) 
+                            {
+                                <span class="badge-popular">🔥 ยอดนิยม</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="badge-category">@recipe.Category</span>
+                        </td>
+                        <td class="text-light">@recipe.TimeToCook</td>
+                        <td>
+                            <span class="badge-review">💬 @recipe.ReviewCount รีวิว</span>
+                        </td>
+                        <td class="text-end">
+                            <a asp-page="Recipes/View" asp-route-id="@recipe.Id" class="btn btn-purple btn-sm">View</a>
+                            <a asp-page="Recipes/Edit" asp-route-id="@recipe.Id" class="btn btn-outline-purple btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">ไม่พบข้อมูลเมนูอาหาร</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-3">
+    <a asp-page="Recipes/Create" class="btn btn-purple">+ Create new Recipe</a>
+</div>

@@ -1,0 +1,109 @@
+﻿@page "{id}/{handler?}"
+@model RecipeApp.Pages.Recipes.ViewModel
+@{
+    ViewData["Title"] = Model.Recipe.Name;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h2>@Model.Recipe.Name</h2>
+    @if (!string.IsNullOrEmpty(Model.Recipe.Category))
+    {
+        <span class="badge bg-secondary fs-6">@Model.Recipe.Category</span>
+    }
+</div>
+
+<!-- ส่วนแสดงคะแนนดาวเฉลี่ย -->
+<div class="mb-3 fs-5">
+    <span class="text-warning">
+        @for (int i = 1; i <= 5; i++)
+        {
+            if (i <= Math.Round(Model.Recipe.AverageRating))
+            {
+                <span>★</span>
+            }
+            else
+            {
+                <span class="text-muted">☆</span>
+            }
+        }
+    </span>
+    <strong>@Model.Recipe.AverageRating</strong> / 5 
+    <span class="text-muted fs-6">(@Model.Recipe.ReviewCount รีวิว)</span>
+</div>
+
+<form asp-page-handler="Delete" asp-route-id="@Model.Recipe.Id" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
+    <p>
+        <a asp-page="Edit" asp-route-id="@Model.Recipe.Id" class="btn btn-primary">Edit</a>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </p>
+</form>
+
+<hr />
+
+<h4>วิธีทำ</h4>
+<p>@Model.Recipe.Method</p>
+
+<h4>วัตถุดิบ</h4>
+<dl class="row">
+    @foreach (var item in Model.Recipe.Ingredients)
+    {
+        <dt class="col-sm-3">@item.Name</dt>
+        <dd class="col-sm-9">@item.Quantity</dd>
+    }
+</dl>
+
+<hr class="my-4" />
+
+<!-- ส่วนฟอร์มส่งรีวิว -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">เขียนรีวิวเมนูนี้</h5>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-page-handler="Review" asp-route-id="@Model.Recipe.Id">
+            <div class="mb-3">
+                <label class="form-label">ให้คะแนนดาว:</label>
+                <select asp-for="NewReview.Rating" class="form-select" style="max-width: 200px;">
+                    <option value="5">⭐⭐⭐⭐⭐ (5 ดาว)</option>
+                    <option value="4">⭐⭐⭐⭐ (4 ดาว)</option>
+                    <option value="3">⭐⭐⭐ (3 ดาว)</option>
+                    <option value="2">⭐⭐ (2 ดาว)</option>
+                    <option value="1">⭐ (1 ดาว)</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">ความคิดเห็น:</label>
+                <textarea asp-for="NewReview.Comment" class="form-control" rows="3" placeholder="เขียนความรู้สึก ความอร่อย หรือคำแนะนำ..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">ส่งรีวิว</button>
+        </form>
+    </div>
+</div>
+
+<!-- ส่วนแสดงความคิดเห็นทั้งหมด -->
+<h4>ความคิดเห็นจากผู้ใช้งาน</h4>
+@if (Model.Recipe.Reviews != null && Model.Recipe.Reviews.Any())
+{
+    <div class="list-group mb-4">
+        @foreach (var review in Model.Recipe.Reviews)
+        {
+            <div class="list-group-item list-group-item-action flex-column align-items-start my-1 rounded border">
+                <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1 fw-bold">👤 @review.UserName</h6>
+                    <small class="text-muted">@review.CreatedAt.ToString("dd/MM/yyyy HH:mm")</small>
+                </div>
+                <div class="text-warning mb-1">
+                    @for (int i = 0; i < review.Rating; i++)
+                    {
+                        <span>★</span>
+                    }
+                </div>
+                <p class="mb-1 text-secondary">@review.Comment</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">ยังไม่มีรีวิวสำหรับเมนูนี้ เป็นคนแรกที่รีวิวเลย!</p>
+}
