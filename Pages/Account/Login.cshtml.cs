@@ -19,11 +19,11 @@ namespace RecipeApp.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "??????????????")]
-            [EmailAddress(ErrorMessage = "?????????????????????")]
+            [Required(ErrorMessage = "กรุณากรอกอีเมล")]
+            [EmailAddress(ErrorMessage = "รูปแบบอีเมลไม่ถูกต้อง")]
             public string Email { get; set; } = string.Empty;
 
-            [Required(ErrorMessage = "?????????????????")]
+            [Required(ErrorMessage = "กรุณากรอกรหัสผ่าน")]
             [DataType(DataType.Password)]
             public string Password { get; set; } = string.Empty;
 
@@ -44,7 +44,7 @@ namespace RecipeApp.Pages.Account
                     return RedirectToPage("/Index");
                 }
 
-                ModelState.AddModelError(string.Empty, "???????????????????????????");
+                ModelState.AddModelError(string.Empty, "อีเมลหรือรหัสผ่านไม่ถูกต้อง");
             }
 
             return Page();
